@@ -5,6 +5,7 @@
 #include<iostream>
 #include<iomanip>
 using namespace std;
+void cone();
 void circlePoint(int a,int b,int r);
 void circlePlot(int a,int b,int x ,int y,int k);
 void takeData();
@@ -34,6 +35,12 @@ cout<<"-------------------------------------"<<endl;
 	circlePoint(a,b,r);
 				
 };
+
+void cone(){
+	for(int i;i<100;i++){
+		circlePoint(200+i,200+i,i);
+	}
+}
 void circlePoint(int a,int b,int r){
 	int x=0;
 	int y=r;

@@ -5,13 +5,9 @@
 #include<iostream>
 #include<iomanip>
 using namespace std;
-
 void calculation(int x1,int y1,int x2,int  y2 );
 void display(int k,int x1,int x2);
 void takeData();
-
-
-
 void calculation(int x1,int y1,int x2 ,int y2  ){
 	int dx=x2-x1;
 	int dy=y2-y1;
