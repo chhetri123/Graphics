@@ -12,8 +12,9 @@ class Transformation{
 	float x[SIZE];
 	float y[SIZE];
 	float angle;
-	char ch;
+	int ch;
 	float sk[2];
+	float tk[2];
 	float ref[2]={0,0};
 	float sh[2]={0,0};
 		Transformation(){
@@ -31,6 +32,10 @@ class Transformation{
 		cout<<"Enter the scalling factor (sx,sy) ";
 		cin>>sk[0]>>sk[1];
 	}
+	void takeDataForTranslation(){
+		cout<<"Enter the translation factor (tx,ty) ";
+		cin>>tk[0]>>tk[1];
+	}
 	void takeDataForRotation(){
 		cout<<"Enter the angle of rotation";
 		cin>>angle;
@@ -38,10 +43,10 @@ class Transformation{
 	void takeDataForShear(){
 		
 		do{
-		cout<<"Enter in which axis Shear is reference (x/y) ";
+		cout<<"Enter in which axis Shear is reference (1 for x-axis or 2 for y axis) ";
 		cin>>ch;
-	}while(ch!='x'||ch!='X'|| ch!='y'|| ch!='Y');
-	if(ch=='x' ||ch=='X'){
+	}while(ch<= 0 || ch>2);
+	if(ch==1){
 		cout<<"Enter Xref ";
 			cin>>ref[0];
 		cout<<"Enter shy ";
@@ -58,6 +63,9 @@ class Transformation{
 	}
 	void doScalling(){
 		Scaling(x,y,a,sk);
+	}
+	void doTranslation(){
+		Translation(x,y,a,tk);
 	}
 	void doRotationAboutCentroid(){
 		Rotation(x,y,a,angle,"centroid");
@@ -80,10 +88,10 @@ int main()
     do{
 	
 cout<<"Enter the no for which transformation do you want:" <<endl;
-cout<<"1) Scalling\n2) ScallingFromCentroid\n3) Rotation\n4) RotationAboutCentroid\n5) Shear\n6) exit"<<endl;
+cout<<"1) Scalling\n2) ScallingFromCentroid\n3) Rotation\n4) RotationAboutCentroid\n5) Shear\n6)Translation\n7) exit"<<endl;
 cin>>n;
 system("cls");
-}while(n>6);
+}while(n>8);
 
 switch(n){
 
@@ -115,7 +123,13 @@ switch(n){
 		 T.doShear();
 		 break;
 	case 6:
-	 	 exit(0);	 
+		T.takeData();
+		 T.takeDataForTranslation();
+		 T.doTranslation();
+		 break;
+	case 7:
+		 exit(0); 
+		 break;	 	 
 	default:
 		cout<<"Choose right option";
 		break;
@@ -126,27 +140,3 @@ switch(n){
     getch();
     closegraph();
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
