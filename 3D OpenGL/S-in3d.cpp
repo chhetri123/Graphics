@@ -2,14 +2,14 @@
 
 float ver1[8][3] =
 {
-    {-0.1,-0.1,1.0},
-    {-0.1,0.1,1.0},
-    {0.1,0.1,1.0},
-    {0.1,-0.1,1.0},
-    {-0.1,-0.1,-1.0},
-    {-0.1,0.1,-1.0},
-    {0.1,0.1,-1.0},
-    {0.1,-0.1,-1.0},
+    {-0.1,-3.0,0.3},
+    {-0.1,3.0,0.3},
+    {0.1,3.0,0.3},
+    {0.1,-3.0,0.3},
+    {-0.1,-3.0,-0.3},
+    {-0.1,3.0,-0.3},
+    {0.1,3.0,-0.30},
+    {0.1,-3.0,-0.30},
 };
 float ver2[8][3];
 
@@ -18,11 +18,11 @@ void setAnotherVertices() {
     for (int i = 0; i < 8; i++) {
         for (int j = 0; j < 3; j++) {
             ver2[i][j] = ver1[i][j];
-            
-
         }
-        ver2[i][1] = 7* ver2[i][1];
-        ver2[i][2] = 0.1 * ver2[i][2];
+        ver2[i][1] = 0.1 * ver1[i][1];
+        ver2[i][2] = 3 * ver1[i][2];
+
+
     }
 }
 GLfloat color[8][3] =
@@ -66,20 +66,6 @@ void colorcube(float ver[][3])
     quad(0, 1, 5, 4, ver);
 }
 
-double rotate_y = 0;
-double rotate_x = 0;
-void specialKeys(int key, int x, int y)
-{
-    if (key == GLUT_KEY_RIGHT)
-        rotate_y += 5;
-    else if (key == GLUT_KEY_LEFT)
-        rotate_y -= 5;
-    else if (key == GLUT_KEY_UP)
-        rotate_x += 5;
-    else if (key == GLUT_KEY_DOWN)
-        rotate_x -= 5;
-    glutPostRedisplay();
-}
 
 void display()
 {
@@ -96,19 +82,22 @@ void display()
     glLoadIdentity();
     gluLookAt
     (
-        3, 0, 0,
+        5, 0, 0,
         0, 0, 0,
         0, 0, 1
     );
-
-    glRotatef(rotate_x, 1.0, 0.0, 0.0);
-    glRotatef(rotate_y, 0.0, 1.0, 0.0);
     setAnotherVertices();
+     glTranslatef(-3.0f, 0.0f, 6.0f);
     colorcube(ver1);
-    glTranslatef(0.0f, 0.8f, 0.0f);
-    colorcube(ver1);
-    glTranslatef(0.0f, 0.8f, 0.0f);
+    glTranslatef(0.0f, -2.7f, -1.0f);
     colorcube(ver2);
+    glTranslatef(0.0f, 2.7f, -1.2f);
+    colorcube(ver1);
+    glTranslatef(0.0f, 2.7f, -1.0f);
+    colorcube(ver2);
+    glTranslatef(0.0f, -2.7f, -1.2f);
+    colorcube(ver1);
+   
 
     glutSwapBuffers();
 }
@@ -118,9 +107,8 @@ int main(int argc, char** argv)
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_RGBA | GLUT_DEPTH | GLUT_DOUBLE);
     glutInitWindowSize(800, 800);
-    glutCreateWindow("Manish Chhetri (PAS076BEI015) H");
+    glutCreateWindow("SANDIP SHRESTHA (PAS076BEI032) S");;
     glutDisplayFunc(display);
-    glutSpecialFunc(specialKeys);
     glEnable(GL_DEPTH_TEST);
     glutMainLoop();
     return 0;
